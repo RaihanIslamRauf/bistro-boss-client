@@ -6,27 +6,6 @@ import { FaShoppingCart } from "react-icons/fa";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
-  const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    const fetchCartData = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/carts", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        setCartItems(data);
-      } catch (error) {
-        console.error("Failed to fetch cart data:", error);
-      }
-    };
-
-    fetchCartData();
-  }, []);
-
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -51,7 +30,7 @@ const Navbar = () => {
         <Link to="/">
           <button className="btn">
             <FaShoppingCart className="mr-2" />
-            <div className="badge badge-secondary">{cartItems.length}</div>
+            <div className="badge badge-secondary">+0</div>
           </button>
         </Link>
       </li>
